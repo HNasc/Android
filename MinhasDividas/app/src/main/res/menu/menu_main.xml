@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itDividas"
+        app:showAsAction="ifRoom|withText"
+        android:title="Dívidas">
+    </item>
+    <item
+        android:id="@+id/itGrupoCusto"
+        app:showAsAction="never"
+        android:title="Grupos de Custo">
+    </item>
+    <item
+        android:id="@+id/itCategoria"
+        app:showAsAction="never"
+        android:title="Categoria">
+    </item>
+    <item
+        android:id="@+id/itSair"
+        app:showAsAction="never"
+        android:title="Sair">
+    </item>
+</menu>
