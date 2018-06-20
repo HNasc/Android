@@ -1,0 +1,63 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-->Formulario<!-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Termo em Inglês"/>
+    <EditText
+        android:id="@+id/edtTermoIngles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="120"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Termo em Português"/>
+    <EditText
+        android:id="@+id/edtTermoPortugues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="120"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Classe Gramatical"/>
+    <Spinner
+        android:id="@+id/spClasseGramatical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-->Botoes<!-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:text="SALVAR"
+        android:id="@+id/btnSalvar"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="LISTAR"
+        android:id="@+id/btnListar"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="CANCELAR"
+        android:id="@+id/btnCancelar"/>
+    </LinearLayout>
+
+</LinearLayout>
