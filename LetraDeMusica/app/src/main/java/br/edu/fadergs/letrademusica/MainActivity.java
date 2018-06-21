@@ -1,17 +1,18 @@
 package br.edu.fadergs.letrademusica;
 
-import android.app.AlertDialog;
-import android.database.Cursor;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,9 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     JSONArray jsonArray;
     MusicasAdapter musicasAdapter;
     ListView listView;
+    EditText edtPesquisa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,44 +96,28 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(result);
             baseProgressBar.setVisibility(View.INVISIBLE);
 
+            edtPesquisa = (EditText) findViewById(R.id.edtPesquisa);
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(edtPesquisa.getWindowToken(), 0);
+
             listarMusicas(result);
         }
 
-        private String bytesParaString(InputStream is) throws IOException {
-            byte[] buffer = new byte[1024];
-
-            // O bufferzao vai armazenar todos os bytes lidos
-            ByteArrayOutputStream bufferzao = new ByteArrayOutputStream();
-
-            // precisamos saber quantos bytes foram lidos
-            int bytesLidos;
-
-            // Vamos lendo de 1KB por vez...
-            while ((bytesLidos = is.read(buffer)) != -1) {
-                // copiando a quantidade de bytes lidos do buffer para o bufferzão
-                bufferzao.write(buffer, 0, bytesLidos);
-            }
-            return new String(bufferzao.toByteArray(), "UTF-8");
-        }
-
-        private HttpURLConnection conectar(String urlArquivo) throws IOException {
-            final int SEGUNDOS = 1000;
-            URL url = new URL(urlArquivo);
-            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-            conexao.setReadTimeout(10 * SEGUNDOS);
-            conexao.setConnectTimeout(15 * SEGUNDOS);
-            conexao.setRequestMethod("GET");
-            conexao.setDoInput(true);
-            conexao.setDoOutput(false);
-            conexao.connect();
-            return conexao;
-        }
 
         public void listarMusicas(String musicas){
             listView = findViewById(R.id.listView);
 
             musicasAdapter = new MusicasAdapter(MainActivity.this, R.layout.item_lista);
             listView.setAdapter(musicasAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Musica itemSelecionado = (Musica) parent.getItemAtPosition(position);
+                    String idMusica = itemSelecionado.getId();
+                    chamaLetra(idMusica);
+                }
+            });
 
             try {
                 jsonObject = new JSONObject(musicas);
@@ -158,5 +141,42 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        public void chamaLetra (String idMusica){
+            Intent intent = new Intent(MainActivity.this, LetraActivity.class);
+            intent.putExtra("idMusica", idMusica);
+            startActivity(intent);
+
+        }
+
+    }
+
+    public String bytesParaString(InputStream is) throws IOException {
+        byte[] buffer = new byte[1024];
+
+        // O bufferzao vai armazenar todos os bytes lidos
+        ByteArrayOutputStream bufferzao = new ByteArrayOutputStream();
+
+        // precisamos saber quantos bytes foram lidos
+        int bytesLidos;
+
+        // Vamos lendo de 1KB por vez...
+        while ((bytesLidos = is.read(buffer)) != -1) {
+            // copiando a quantidade de bytes lidos do buffer para o bufferzão
+            bufferzao.write(buffer, 0, bytesLidos);
+        }
+        return new String(bufferzao.toByteArray(), "UTF-8");
+    }
+
+    public HttpURLConnection conectar(String urlArquivo) throws IOException {
+        final int SEGUNDOS = 1000;
+        URL url = new URL(urlArquivo);
+        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+        conexao.setReadTimeout(10 * SEGUNDOS);
+        conexao.setConnectTimeout(15 * SEGUNDOS);
+        conexao.setRequestMethod("GET");
+        conexao.setDoInput(true);
+        conexao.setDoOutput(false);
+        conexao.connect();
+        return conexao;
     }
 }
