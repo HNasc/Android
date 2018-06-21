@@ -1,0 +1,31 @@
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-->Pesquisa<!-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parse JSON"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET JSON"
+        android:id="@+id/btnGetJson"
+        android:onClick="getJSON"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PARSE JSON"
+        android:id="@+id/btnParseJson"
+        android:onClick="parseJSON"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JSON Apper here"
+        android:textAlignment="center"
+        android:textSize="22dp"/>
+</LinearLayout>

@@ -28,9 +28,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lista;
-    private TextView txtTeste;
     private LinearLayout baseProgressBar;
+    String json_string;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    MusicasAdapter musicasAdapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Recupera referencia dos campos
-        txtTeste = (TextView) findViewById(R.id.txtTeste);
         baseProgressBar = (LinearLayout) findViewById(R.id.baseProgressBar);
     }
 
@@ -49,23 +51,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class ConsultaMusicaVagalume extends AsyncTask<String, Void, List<Musica>> {
+    private class ConsultaMusicaVagalume extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
+
             baseProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected List<Musica> doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             /*String url = "https://api.vagalume.com.br/search.php"; https://api.vagalume.com.br/searchvamos%20fugir*/
             String url = "https://api.vagalume.com.br/search";
             String musica = ".excerpt?q=" + params[1];
             //String limite = "&limit=1";
             String urlCompleta = url + musica;// + limite;
-            //String urlCompleta = "http://api.postmon.com.br/v1/cep/91750100";
-            List<Musica> musicas;
-            int i;
-
+            //https://api.vagalume.com.br/search.excerpt?q=one
             try{
 
                 HttpURLConnection conexao = conectar(urlCompleta);
@@ -78,21 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     //e do String estou convertendo em JSON
                     JSONObject json = new JSONObject(bytesParaString(is));
 
-                    final Cursor cursor;
-
-                    //A partir do JSON, posso acessar todos os elementos do objeto
-                    //Abaixo está acessando a "musica"
                     JSONObject response = json.getJSONObject("response");
-                    JSONArray docs = response.getJSONArray("docs");
-                    for(i = 0; i < docs.length(); i++){
-                        JSONObject doc = docs.getJSONObject(i);
-                        musicas = getMusicas(doc);
-                    }
-                    JSONObject doc = docs.getJSONObject(0);
+                    //JSONArray docs = response.getJSONArray("docs");
+                    //JSONObject doc = docs.getJSONObject(0);
 
-                    //return result = doc.getString("title");
-                    musicas = getMusicas(json);
-                    return musicas;
+                    return response.toString();
                 }
 
             } catch (Exception e){
@@ -103,67 +93,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Musica> result) {
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
             baseProgressBar.setVisibility(View.INVISIBLE);
-            //txtTeste.setText(s);
-            int i;
-            if(result.size() > 0){
 
-                ArrayList<String> itens = new ArrayList<String>();
-
-                for (i = 0; i < result.size(); i++){
-                    itens.add(result.get(i).getNome());
-                }
-
-                lista = (ListView) findViewById(R.id.listView);
-                lista.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_expandable_list_item_1, itens));
-                //ArrayAdapter<Musica> adapter = new ArrayAdapter<Musica>(
-                // MainActivity.this,
-                //R.layout.item_lista);
-
-                //SimpleCursorAdapter adaptador = new SimpleCursorAdapter(MainActivity.this, R.layout.item_lista, ,)
-
-                //lista.setAdapter(adapter);
-            }else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        MainActivity.this).setTitle("Atenção")
-                        .setMessage("Não foi possivel acessar essas informções...")
-                        .setPositiveButton("OK", null);
-                builder.create().show();
-            }
-
-
-
-        }
-
-        private List<Musica> getMusicas(JSONObject json){
-
-            List<Musica> musicas = new ArrayList<Musica>();
-
-            try{
-                JSONObject response = json.getJSONObject("response");
-                JSONArray docs = response.getJSONArray("docs");
-
-                for (int i = 0; i < docs.length(); i++){
-                    JSONObject musica = new JSONObject(docs.getString(i));
-
-                    Log.i("MUSICA_VAGALUME", "nome=" + musica.getString("title"));
-
-                    Musica objMusica = new Musica();
-                    objMusica.setNome(musica.getString("title"));
-                    objMusica.setArtista(musica.getString("band"));
-
-                    musicas.add(objMusica);
-
-                    return  musicas;
-                }
-
-            }catch (JSONException e){
-                Log.e("JSON_PARSE", e.getMessage());
-            }
-
-            return  musicas;
+            listarMusicas(result);
         }
 
         private String bytesParaString(InputStream is) throws IOException {
@@ -194,6 +128,34 @@ public class MainActivity extends AppCompatActivity {
             conexao.setDoOutput(false);
             conexao.connect();
             return conexao;
+        }
+
+        public void listarMusicas(String musicas){
+            listView = findViewById(R.id.listView);
+
+            musicasAdapter = new MusicasAdapter(MainActivity.this, R.layout.item_lista);
+            listView.setAdapter(musicasAdapter);
+
+            try {
+                jsonObject = new JSONObject(musicas);
+                jsonArray = jsonObject.getJSONArray("docs");
+                int count = 0;
+                String id, nome, artista;
+
+                while (count < jsonArray.length()){
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    id = JO.getString("id");
+                    nome = JO.getString("title");
+                    artista = JO.getString("band");
+                    Musica musica = new Musica(id, nome, artista);
+                    musicasAdapter.add(musica);
+
+                    count++;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
 
     }
