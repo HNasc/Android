@@ -1,0 +1,94 @@
+{
+  "project_info": {
+    "project_number": "570768643564",
+    "firebase_url": "https://minhas-dividas-5d811.firebaseio.com",
+    "project_id": "minhas-dividas-5d811",
+    "storage_bucket": "minhas-dividas-5d811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570768643564:android:cae0ac639bab2f99",
+        "android_client_info": {
+          "package_name": "br.edu.fadergs.minhasdividas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBYJ2rIgqBiXYShuRQq5Ymr5GYp2H01Ig"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570768643564:android:031ffc6dca99463d",
+        "android_client_info": {
+          "package_name": "fadergs.edu.br.minhasdividas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570768643564-0ktpbj4vou0a1eddffui23uts5rf13ec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fadergs.edu.br.minhasdividas",
+            "certificate_hash": "c0679c904c0b10bd3a994628e431c1a988aa7f43"
+          }
+        },
+        {
+          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBYJ2rIgqBiXYShuRQq5Ymr5GYp2H01Ig"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

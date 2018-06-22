@@ -1,4 +1,4 @@
-package br.edu.fadergs.minhasdividas;
+package fadergs.edu.br.minhasdividas;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -17,10 +17,10 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
-    public void useAppContext() {
+    public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("br.edu.fadergs.minhasdividas", appContext.getPackageName());
+        assertEquals("fadergs.edu.br.minhasdividas", appContext.getPackageName());
     }
 }
