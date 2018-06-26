@@ -8,41 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:570768643564:android:cae0ac639bab2f99",
-        "android_client_info": {
-          "package_name": "br.edu.fadergs.minhasdividas"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCBYJ2rIgqBiXYShuRQq5Ymr5GYp2H01Ig"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:570768643564:android:031ffc6dca99463d",
         "android_client_info": {
           "package_name": "fadergs.edu.br.minhasdividas"
@@ -58,8 +23,12 @@
           }
         },
         {
-          "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "570768643564-tbgd8rjadn39e09lod4dbr4g6m4afdv3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fadergs.edu.br.minhasdividas",
+            "certificate_hash": "97451320eb345a5703b7585e41ecd06f54fa2fe0"
+          }
         },
         {
           "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
