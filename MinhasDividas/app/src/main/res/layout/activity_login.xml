@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-MAIL"
+        android:inputType="textEmailAddress"
         android:maxLength="120"/>
     <EditText
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="SENHA"
+        android:inputType="textPassword"
         android:maxLength="120"/>
 
     <!-->Botoes<!-->

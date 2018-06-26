@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategoriaActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Activity.CategoriaActivity" />
+        <activity android:name=".Activity.MainActivity"></activity>
     </application>
 
 </manifest>

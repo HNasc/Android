@@ -1,4 +1,4 @@
-package fadergs.edu.br.minhasdividas;
+package fadergs.edu.br.minhasdividas.Activity;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+
+import fadergs.edu.br.minhasdividas.R;
 
 public class MainActivity extends AppCompatActivity {
 
