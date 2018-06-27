@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import fadergs.edu.br.minhasdividas.Adapter.CategoriasAdapter;
 import fadergs.edu.br.minhasdividas.DAO.ConfiguracaoFirebase;
 import fadergs.edu.br.minhasdividas.Entidades.Categorias;
+import fadergs.edu.br.minhasdividas.Helper.Preferencias;
 import fadergs.edu.br.minhasdividas.R;
 
 public class CategoriaActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class CategoriaActivity extends AppCompatActivity {
     private Button btnCatAdd;
     private AlertDialog alerta;
     private Categorias categoriasExcluir;
+    private Preferencias preferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,9 @@ public class CategoriaActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listViewCategorias);
         adapter = new CategoriasAdapter(this, categorias);
         listView.setAdapter(adapter);
-        firebase = ConfiguracaoFirebase.getFirebase().child("categoria");
+        preferencias = new Preferencias(CategoriaActivity.this);
+        firebase = ConfiguracaoFirebase.getFirebase().child("usuario").child(String.valueOf(preferencias.getId())).child("categoria");
+
 
         valueEventListenerCategorias = new ValueEventListener() {
             @Override
@@ -90,16 +94,24 @@ public class CategoriaActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 
+                firebase = ConfiguracaoFirebase.getFirebase().child("usuario").child(String.valueOf(preferencias.getId()));
                 categoriasExcluir = adapter.getItem(i);
 
+                //Valida: Se o item for padrão do sistema, não permite que seja feita sua exclusão
+                if(categoriasExcluir.getPadrao().toString().equals("S")){
+                    Toast.makeText(CategoriaActivity.this, "Não é possível remover uma categoria padrão do sistema", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                //Alerta: Questiona se o usuário quer remover o item
                 AlertDialog.Builder builder = new AlertDialog.Builder(CategoriaActivity.this);
                 builder.setTitle("Confirma Exclusão");
                 builder.setMessage("Você deseja excluir a categoria " + categoriasExcluir.getDescricao().toString() + "?");
                 builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        firebase = ConfiguracaoFirebase.getFirebase().child("categoria");
-                        firebase.child(categoriasExcluir.getDescricao().toString()).removeValue();
+
+                        firebase.child("categoria").child(categoriasExcluir.getDescricao().toString()).removeValue();
 
                         Toast.makeText(CategoriaActivity.this, "Categoria removida com sucesso!", Toast.LENGTH_SHORT).show();
                     }

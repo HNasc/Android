@@ -28,7 +28,9 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.CadastroActivity" />
         <activity android:name=".Activity.CadCategoriaActivity" />
-        <activity android:name=".Activity.CategoriaActivity"></activity>
+        <activity android:name=".Activity.CategoriaActivity" />
+        <activity android:name=".Activity.CadGrupoCustoActivity" />
+        <activity android:name=".Activity.GrupoCustoActivity"></activity>
     </application>
 
 </manifest>

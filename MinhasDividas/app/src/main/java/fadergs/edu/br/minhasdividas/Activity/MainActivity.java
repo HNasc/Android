@@ -10,10 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import fadergs.edu.br.minhasdividas.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth usuarioFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.itCategoria:
-                Toast.makeText(MainActivity.this, "Categoria", Toast.LENGTH_SHORT).show();
                 abrirCategoria();
                 break;
             case R.id.itGrupoCusto:
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Dividas", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.itSair:
-                Toast.makeText(MainActivity.this, "Sair", Toast.LENGTH_SHORT).show();
+                deslogarUsuario();
                 break;
         }
 
@@ -53,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
     public void abrirCategoria(){
         Intent intent = new Intent(MainActivity.this, CategoriaActivity.class);
         startActivity(intent);
+    }
+
+    private void deslogarUsuario(){
+        usuarioFirebase.signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

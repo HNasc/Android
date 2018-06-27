@@ -11,38 +11,36 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 
 import fadergs.edu.br.minhasdividas.DAO.ConfiguracaoFirebase;
-import fadergs.edu.br.minhasdividas.Entidades.Categorias;
+import fadergs.edu.br.minhasdividas.Entidades.GruposCusto;
 import fadergs.edu.br.minhasdividas.Helper.Preferencias;
 import fadergs.edu.br.minhasdividas.R;
 
-public class CadCategoriaActivity extends AppCompatActivity {
+public class CadGrupoCustoActivity extends AppCompatActivity {
 
-    private EditText edtDescCategoria;
+    private EditText edtDescGrupoCusto;
     private Button btnSalvar;
     private Button btnVoltar;
-    private Categorias categorias;
+    private GruposCusto gruposCusto;
     private DatabaseReference firebase;
     private Preferencias preferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cad_categoria);
+        setContentView(R.layout.activity_cad_grupo_custo);
 
-        edtDescCategoria = (EditText) findViewById(R.id.edtDescCategoria);
+        edtDescGrupoCusto = (EditText) findViewById(R.id.edtDescGrupoCusto);
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
-
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categorias = new Categorias();
-                categorias.setDescricao(edtDescCategoria.getText().toString());
-                categorias.setPadrao("N");
-                //categorias.setValor(Double.ValueOf(edtDescCategoria.getText().toString()));
+                gruposCusto = new GruposCusto();
+                gruposCusto.setDescricao(edtDescGrupoCusto.getText().toString());
 
-                salvarCategoria(categorias);
+                salvarGrupoCusto(gruposCusto);
+
             }
         });
 
@@ -54,17 +52,14 @@ public class CadCategoriaActivity extends AppCompatActivity {
         });
 
     }
-
-    private boolean salvarCategoria(Categorias categoria){
-
+    private boolean salvarGrupoCusto(GruposCusto grupoCusto){
         try{
-
-            preferencias = new Preferencias(CadCategoriaActivity.this);
+            preferencias = new Preferencias(CadGrupoCustoActivity.this);
 
             firebase = ConfiguracaoFirebase.getFirebase().child("usuario").child(String.valueOf(preferencias.getId()));
-            firebase.child("categoria").child(categoria.getDescricao().toString()).setValue(categorias);
+            firebase.child("grupocusto").child(grupoCusto.getDescricao().toString()).setValue(gruposCusto);
 
-            Toast.makeText(CadCategoriaActivity.this, "Categoria inserida com sucesso!", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadGrupoCustoActivity.this, "Grupo de Custo inserido com sucesso!", Toast.LENGTH_LONG).show();
             voltarParaListagem();
 
             return true;
@@ -72,12 +67,11 @@ public class CadCategoriaActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
             return false;
-
         }
     }
 
     private void voltarParaListagem(){
-        Intent intent = new Intent(CadCategoriaActivity.this, CategoriaActivity.class);
+        Intent intent = new Intent(CadGrupoCustoActivity.this, CategoriaActivity.class);
         startActivity(intent);
         finish();
     }
