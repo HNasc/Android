@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.CategoriaActivity" />
-        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.CadastroActivity"></activity>
     </application>
 
 </manifest>

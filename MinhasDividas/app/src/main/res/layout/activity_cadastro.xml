@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.CadastroActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtCadNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:inputType="textCapCharacters"/>
+
+            <EditText
+                android:id="@+id/edtCadSobrenome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sobrenome"
+                android:inputType="textCapCharacters"/>
+
+            <EditText
+                android:id="@+id/edtCadNascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data de Nascimento"
+                android:inputType="date"/>
+
+            <EditText
+                android:id="@+id/edtCadEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/edtCadSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:inputType="textPassword"/>
+            <EditText
+                android:id="@+id/edtCadConfSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirmar Senha"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SALVAR"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

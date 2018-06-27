@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "570768643564-on7eisbovn7afda7gj74rfl0qq981obr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fadergs.edu.br.minhasdividas",
+            "certificate_hash": "98b770df8308b0c8a75413219d15442b87320f9c"
+          }
+        },
+        {
           "client_id": "570768643564-7081gejli90pbbu5bcc9sks6abb6cunj.apps.googleusercontent.com",
           "client_type": 3
         }
