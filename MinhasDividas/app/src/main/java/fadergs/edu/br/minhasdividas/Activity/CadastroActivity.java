@@ -18,8 +18,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 import fadergs.edu.br.minhasdividas.DAO.ConfiguracaoFirebase;
+import fadergs.edu.br.minhasdividas.Entidades.Categorias;
 import fadergs.edu.br.minhasdividas.Entidades.Usuarios;
 import fadergs.edu.br.minhasdividas.Helper.Base64Custom;
 import fadergs.edu.br.minhasdividas.Helper.Preferencias;
@@ -36,6 +38,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnSalvar;
 
     private Usuarios usuarios;
+    private Categorias categorias;
 
     private FirebaseAuth autenticacao;
 
@@ -51,6 +54,8 @@ public class CadastroActivity extends AppCompatActivity {
         edtCadSenha = (EditText) findViewById(R.id.edtCadSenha);
         edtCadConfSenha = (EditText) findViewById(R.id.edtCadConfSenha);
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
+
+
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +93,7 @@ public class CadastroActivity extends AppCompatActivity {
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
                     usuarios.setId((idUsuario));
                     usuarios.salvar();
+                    criarCategoriasPadroes(idUsuario);
 
                     Preferencias preferencias = new Preferencias(CadastroActivity.this);
                     preferencias.salvarUsuarioPreferencias(idUsuario, usuarios.getNome());
@@ -124,6 +130,25 @@ public class CadastroActivity extends AppCompatActivity {
         Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void criarCategoriasPadroes(String idUsuario){
+        categorias = new Categorias();
+        categorias.setPadrao("S");
+
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        categorias.setDescricao("Lazer");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
+        categorias.setDescricao("Vestimenta");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
+        categorias.setDescricao("Alimentação");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
+        categorias.setDescricao("Locomoção");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
+        categorias.setDescricao("Estudo");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
+        categorias.setDescricao("Outros");
+        referenciaFirebase.child("usuario").child(String.valueOf(idUsuario)).child("categoria").child(categorias.getDescricao().toString()).setValue(categorias);
     }
 
 }
