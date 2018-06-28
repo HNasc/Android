@@ -71,7 +71,7 @@ public class CadGrupoCustoActivity extends AppCompatActivity {
     }
 
     private void voltarParaListagem(){
-        Intent intent = new Intent(CadGrupoCustoActivity.this, CategoriaActivity.class);
+        Intent intent = new Intent(CadGrupoCustoActivity.this, GrupoCustoActivity.class);
         startActivity(intent);
         finish();
     }

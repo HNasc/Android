@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-MAIL"
-        android:text="dhuli@gmail.com"
+        android:text="oliver@gmail.com"
         android:inputType="textEmailAddress"
         android:maxLength="120"/>
     <EditText

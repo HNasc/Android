@@ -52,7 +52,6 @@ public class CategoriaActivity extends AppCompatActivity {
         preferencias = new Preferencias(CategoriaActivity.this);
         firebase = ConfiguracaoFirebase.getFirebase().child("usuario").child(String.valueOf(preferencias.getId())).child("categoria");
 
-
         valueEventListenerCategorias = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

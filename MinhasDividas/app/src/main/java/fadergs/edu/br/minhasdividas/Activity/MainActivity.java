@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 abrirCategoria();
                 break;
             case R.id.itGrupoCusto:
-                Toast.makeText(MainActivity.this, "Grupo Custo", Toast.LENGTH_SHORT).show();
+                abrirGrupoCusto();
                 break;
             case R.id.itDividas:
                 Toast.makeText(MainActivity.this, "Dividas", Toast.LENGTH_SHORT).show();
@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void abrirCategoria(){
         Intent intent = new Intent(MainActivity.this, CategoriaActivity.class);
+        startActivity(intent);
+    }
+
+    public void abrirGrupoCusto(){
+        Intent intent = new Intent(MainActivity.this, GrupoCustoActivity.class);
         startActivity(intent);
     }
 
